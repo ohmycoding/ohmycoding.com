@@ -7,13 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Some website using kinds of javascript anti anti-debugger (or code-protection) to protect others analysis their client side code through browser dev-tools, it’s very painful if you really want to see.">
+<meta name="keywords" content="Javascript,Security">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript Anti Anti-debugger&#x2F;Code-Protection">
 <meta property="og:url" content="https://ohmycoding.com/201903/Javascript-Anti-Anti-debugger-Code-Protection/index.html">
 <meta property="og:site_name" content="Ohmycoding">
 <meta property="og:description" content="Some website using kinds of javascript anti anti-debugger (or code-protection) to protect others analysis their client side code through browser dev-tools, it’s very painful if you really want to see.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-21T05:30:00.000Z">
+<meta property="og:updated_time" content="2019-03-22T03:55:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript Anti Anti-debugger&#x2F;Code-Protection">
 <meta name="twitter:description" content="Some website using kinds of javascript anti anti-debugger (or code-protection) to protect others analysis their client side code through browser dev-tools, it’s very painful if you really want to see.">
@@ -95,7 +96,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Utilize-browser-user-script-plugin"><span class="toc-number">1.</span> <span class="toc-text">Utilize browser user script plugin</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Enable-Anti-Anti-debugger-script"><span class="toc-number">2.</span> <span class="toc-text">Enable Anti Anti-debugger script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Free-to-view-the-code-through-browser-dev-tool"><span class="toc-number">3.</span> <span class="toc-text">Free to view the code through browser dev-tool</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Utilize-browser-user-script-plugin"><span class="toc-number">1.</span> <span class="toc-text">Utilize browser user script plugin</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Enable-Anti-Anti-debugger-script"><span class="toc-number">2.</span> <span class="toc-text">Enable Anti Anti-debugger script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Free-to-view-the-code-through-browser-dev-tool"><span class="toc-number">3.</span> <span class="toc-text">Free to view the code through browser dev-tool</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -128,6 +129,11 @@
       
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Javascript/">Javascript</a>, <a class="tag-link" href="/tags/Security/">Security</a>
+    </div>
+
 
     </div>
   </header>
@@ -142,7 +148,11 @@
 <h1 id="Enable-Anti-Anti-debugger-script"><a href="#Enable-Anti-Anti-debugger-script" class="headerlink" title="Enable Anti Anti-debugger script"></a>Enable Anti Anti-debugger script</h1><p>There is an <a href="https://greasyfork.org/en/scripts/32015-anti-anti-debugger/code" target="_blank" rel="noopener">anti anti-debugger</a> script available, please check it out and install it. and i also attached the script in below:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Anti Anti-debugger</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version      1</span></span><br><span class="line"><span class="comment">// @description  Stops most anti debugging implementations by JavaScript obfuscaters</span></span><br><span class="line"><span class="comment">// @author       ww</span></span><br><span class="line"><span class="comment">// @match        *</span></span><br><span class="line"><span class="comment">// @grant        unsafeWindow</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _constructor = unsafeWindow.Function.prototype.constructor;</span><br><span class="line">    <span class="comment">// Hook Function.prototype.constructor</span></span><br><span class="line">    unsafeWindow.Function.prototype.constructor = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fnContent = <span class="built_in">arguments</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span> (fnContent) &#123;</span><br><span class="line">            <span class="keyword">if</span> (fnContent.includes(<span class="string">'debugger'</span>)) &#123; <span class="comment">// An anti-debugger is attempting to stop debugging</span></span><br><span class="line">                <span class="keyword">var</span> caller = <span class="built_in">Function</span>.prototype.constructor.caller; <span class="comment">// Non-standard hack to get the function caller</span></span><br><span class="line">                <span class="keyword">var</span> callerContent = caller.toString();</span><br><span class="line">                <span class="keyword">if</span> (callerContent.includes(<span class="regexp">/\bdebugger\b/gi</span>)) &#123; <span class="comment">// Eliminate all debugger statements from the caller, if any</span></span><br><span class="line">                    callerContent = callerContent.replace(<span class="regexp">/\bdebugger\b/gi</span>, <span class="string">''</span>); <span class="comment">// Remove all debugger expressions</span></span><br><span class="line">                    <span class="built_in">eval</span>(<span class="string">'caller = '</span> + callerContent); <span class="comment">// Replace the function</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Execute the normal function constructor if nothing unusual is going on</span></span><br><span class="line">        <span class="keyword">return</span> _constructor.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 <p>After installation, you can enable it. </p>
-<h1 id="Free-to-view-the-code-through-browser-dev-tool"><a href="#Free-to-view-the-code-through-browser-dev-tool" class="headerlink" title="Free to view the code through browser dev-tool"></a>Free to view the code through browser dev-tool</h1>
+<h1 id="Free-to-view-the-code-through-browser-dev-tool"><a href="#Free-to-view-the-code-through-browser-dev-tool" class="headerlink" title="Free to view the code through browser dev-tool"></a>Free to view the code through browser dev-tool</h1><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><a href="https://greasyfork.org/en/scripts/32015-anti-anti-debugger" target="_blank" rel="noopener">https://greasyfork.org/en/scripts/32015-anti-anti-debugger</a></li>
+<li><a href="https://wiki.greasespot.net/UnsafeWindow" target="_blank" rel="noopener">https://wiki.greasespot.net/UnsafeWindow</a></li>
+</ul>
+
   </div>
 </article>
 
@@ -163,7 +173,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Utilize-browser-user-script-plugin"><span class="toc-number">1.</span> <span class="toc-text">Utilize browser user script plugin</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Enable-Anti-Anti-debugger-script"><span class="toc-number">2.</span> <span class="toc-text">Enable Anti Anti-debugger script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Free-to-view-the-code-through-browser-dev-tool"><span class="toc-number">3.</span> <span class="toc-text">Free to view the code through browser dev-tool</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Utilize-browser-user-script-plugin"><span class="toc-number">1.</span> <span class="toc-text">Utilize browser user script plugin</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Enable-Anti-Anti-debugger-script"><span class="toc-number">2.</span> <span class="toc-text">Enable Anti Anti-debugger script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Free-to-view-the-code-through-browser-dev-tool"><span class="toc-number">3.</span> <span class="toc-text">Free to view the code through browser dev-tool</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
